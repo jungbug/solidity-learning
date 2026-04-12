@@ -29,5 +29,5 @@ describe("myToken deploy", () => {
     it("should return 0 balanceOf for signer 0", async () => {
         const [signer0] = await hre.ethers.getSigners();
         expect(await myTokenC.balanceOf(signer0)).to.equal(0);
-    });
+    }); 
 })  

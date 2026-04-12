@@ -14,15 +14,15 @@ contract MyToken{
         decimals = _decimal;
     }
 
-    function totalSupply() external view returns (uint256) {
-        return totalSupply;
-    }
+    // function totalSupply() external view returns (uint256) {
+    //     return totalSupply;
+    // }
 
-    function balanceOf(address owner) external view returns (uint256) {
-        return balanceOf[owner];
-    } 
+    // function balanceOf(address owner) external view returns (uint256) {
+    //     return balanceOf[owner];
+    // } 
 
-    function name() external view returns (string memory) {
-        return name;
-    }
+    // function name() external view returns (string memory) {
+    //     return name;
+    // }
 }
