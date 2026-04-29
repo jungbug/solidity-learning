@@ -27,6 +27,9 @@ export interface TinyBankInterface extends Interface {
   getFunction(
     nameOrSignature:
       | "lastClaimedBlock"
+      | "manager"
+      | "owner"
+      | "setRewardPerBlock"
       | "stake"
       | "staked"
       | "stakingToken"
@@ -39,6 +42,12 @@ export interface TinyBankInterface extends Interface {
   encodeFunctionData(
     functionFragment: "lastClaimedBlock",
     values: [AddressLike]
+  ): string;
+  encodeFunctionData(functionFragment: "manager", values?: undefined): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "setRewardPerBlock",
+    values: [BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "stake", values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: "staked", values: [AddressLike]): string;
@@ -57,6 +66,12 @@ export interface TinyBankInterface extends Interface {
 
   decodeFunctionResult(
     functionFragment: "lastClaimedBlock",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "manager", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setRewardPerBlock",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "stake", data: BytesLike): Result;
@@ -143,6 +158,16 @@ export interface TinyBank extends BaseContract {
 
   lastClaimedBlock: TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
 
+  manager: TypedContractMethod<[], [string], "view">;
+
+  owner: TypedContractMethod<[], [string], "view">;
+
+  setRewardPerBlock: TypedContractMethod<
+    [_amount: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
   stake: TypedContractMethod<[_amount: BigNumberish], [void], "nonpayable">;
 
   staked: TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
@@ -160,6 +185,15 @@ export interface TinyBank extends BaseContract {
   getFunction(
     nameOrSignature: "lastClaimedBlock"
   ): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "manager"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "owner"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "setRewardPerBlock"
+  ): TypedContractMethod<[_amount: BigNumberish], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "stake"
   ): TypedContractMethod<[_amount: BigNumberish], [void], "nonpayable">;

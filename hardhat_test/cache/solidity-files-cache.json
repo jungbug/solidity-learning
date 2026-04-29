@@ -76,8 +76,8 @@
       ]
     },
     "/Volumes/드라이브/university/blockchain_/hardhat2/hardhat_test/contracts/TinyBank.sol": {
-      "lastModificationDate": 1777440705321,
-      "contentHash": "5a5211f156019caba9687cb7100ff48d",
+      "lastModificationDate": 1777445625987,
+      "contentHash": "ee9c2d696e6ec13d18f39b7c308b6412",
       "sourceName": "contracts/TinyBank.sol",
       "solcConfig": {
         "version": "0.8.28",
@@ -103,7 +103,9 @@
           }
         }
       },
-      "imports": [],
+      "imports": [
+        "./ManagedAccess.sol"
+      ],
       "versionPragmas": [
         "^0.8.28"
       ],
