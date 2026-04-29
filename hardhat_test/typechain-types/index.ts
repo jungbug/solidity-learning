@@ -4,9 +4,11 @@
 import type * as tinyBankSol from "./TinyBank.sol";
 export type { tinyBankSol };
 export type { Lock } from "./Lock";
+export type { ManagedAccess } from "./ManagedAccess";
 export type { MyToken } from "./MyToken";
 export * as factories from "./factories";
 export { Lock__factory } from "./factories/Lock__factory";
+export { ManagedAccess__factory } from "./factories/ManagedAccess__factory";
 export { MyToken__factory } from "./factories/MyToken__factory";
 export type { IMyToken } from "./TinyBank.sol/IMyToken";
 export { IMyToken__factory } from "./factories/TinyBank.sol/IMyToken__factory";

@@ -30,8 +30,11 @@ export interface MyTokenInterface extends Interface {
       | "approve"
       | "balanceOf"
       | "decimals"
+      | "manager"
       | "mint"
       | "name"
+      | "owner"
+      | "setManager"
       | "symbol"
       | "totalSupply"
       | "transfer"
@@ -53,11 +56,17 @@ export interface MyTokenInterface extends Interface {
     values: [AddressLike]
   ): string;
   encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
+  encodeFunctionData(functionFragment: "manager", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "mint",
     values: [BigNumberish, AddressLike]
   ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "setManager",
+    values: [AddressLike]
+  ): string;
   encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "totalSupply",
@@ -76,8 +85,11 @@ export interface MyTokenInterface extends Interface {
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "manager", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setManager", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "totalSupply",
@@ -180,13 +192,23 @@ export interface MyToken extends BaseContract {
 
   decimals: TypedContractMethod<[], [bigint], "view">;
 
+  manager: TypedContractMethod<[], [string], "view">;
+
   mint: TypedContractMethod<
-    [amount: BigNumberish, owner: AddressLike],
+    [amount: BigNumberish, to: AddressLike],
     [void],
     "nonpayable"
   >;
 
   name: TypedContractMethod<[], [string], "view">;
+
+  owner: TypedContractMethod<[], [string], "view">;
+
+  setManager: TypedContractMethod<
+    [_manager: AddressLike],
+    [void],
+    "nonpayable"
+  >;
 
   symbol: TypedContractMethod<[], [string], "view">;
 
@@ -229,15 +251,24 @@ export interface MyToken extends BaseContract {
     nameOrSignature: "decimals"
   ): TypedContractMethod<[], [bigint], "view">;
   getFunction(
+    nameOrSignature: "manager"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
     nameOrSignature: "mint"
   ): TypedContractMethod<
-    [amount: BigNumberish, owner: AddressLike],
+    [amount: BigNumberish, to: AddressLike],
     [void],
     "nonpayable"
   >;
   getFunction(
     nameOrSignature: "name"
   ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "owner"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "setManager"
+  ): TypedContractMethod<[_manager: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "symbol"
   ): TypedContractMethod<[], [string], "view">;

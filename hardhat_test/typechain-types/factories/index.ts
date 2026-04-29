@@ -3,4 +3,5 @@
 /* eslint-disable */
 export * as tinyBankSol from "./TinyBank.sol";
 export { Lock__factory } from "./Lock__factory";
+export { ManagedAccess__factory } from "./ManagedAccess__factory";
 export { MyToken__factory } from "./MyToken__factory";

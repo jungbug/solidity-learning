@@ -53,6 +53,14 @@ describe("MyToken", () => {
             const signer0 = signers[0];
             expect(await myTokenC.balanceOf(signer0)).equal(mintingAmount * 10n ** decimal);
         });
+
+        it("should return or revert when minting infinitly", async () => {
+            const hacker = signers[2];
+            const mintingAgainAmount = hre.ethers.parseUnits("10000", decimal);
+            // await myTokenC.mint(mintingAgainAmount, signer2);
+
+            await expect(myTokenC.connect(hacker).mint(mintingAgainAmount, hacker.address)).to.be.revertedWith("You are not manageble this token");
+        });
     })
 
     describe("Transfer", () => {
