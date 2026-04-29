@@ -16,8 +16,10 @@ describe("TinyBank", () => {
             DECIMALS,
             MINTING_AMOUNT,
         ]);
+        // signers[0], signers[1], signers[2] 를 manager로 등록 (3명 이상 필수)
         tinyBankC = await hre.ethers.deployContract("TinyBank", [
-            await myTokenC.getAddress()
+            await myTokenC.getAddress(),
+            [signers[0].address, signers[1].address, signers[2].address]
         ]);
         await myTokenC.setManager(await tinyBankC.getAddress());
     })
@@ -52,19 +54,16 @@ describe("TinyBank", () => {
             await tinyBankC.stake(stakingAmount);
             await tinyBankC.withdraw(stakingAmount);
             expect(await tinyBankC.staked(signer0.address)).equal(0);
-        }
-        );
+        });
     })
 
     describe("reward", () => {
-
         it("should return 1MT every blocks", async () => {
             const signer0 = signers[0];
             const stakingAmount = hre.ethers.parseUnits("50", DECIMALS);
             await myTokenC.approve(await tinyBankC.getAddress(), stakingAmount);
             await tinyBankC.stake(stakingAmount);
 
-            // console.log(await myTokenC.balanceOf(signer0.address));
             const BLOCKS = 5n;
             const transferAmount = hre.ethers.parseUnits("1", DECIMALS);
             for (let i = 0; i < BLOCKS; i++){
@@ -76,13 +75,37 @@ describe("TinyBank", () => {
                 hre.ethers.parseUnits((BLOCKS + MINTING_AMOUNT + 1n).toString())
             );
         });
+    });
 
-        it("should revert when changing rewardPerBlock by hacker", async () => {
-            const hacker = signers[1];
+    describe("setRewardPerBlock", () => {
+        // manager가 아닌 주소로 호출 시 revert
+        it("should revert when called by non-manager", async () => {
+            const hacker = signers[3];
             const rewardToChange = hre.ethers.parseUnits("10000", DECIMALS);
             await expect(
                 tinyBankC.connect(hacker).setRewardPerBlock(rewardToChange)
-            ).to.be.revertedWith("You are not authorized to change reward amount");
-        })
+            ).to.be.revertedWith("You are not a manager");
+        });
+
+        // 모든 manager가 confirm하지 않은 상황에서 revert
+        it("should revert when not all managers confirmed", async () => {
+            // 3명 중 2명만 confirm
+            await tinyBankC.connect(signers[0]).confirm();
+            await tinyBankC.connect(signers[1]).confirm();
+            const rewardToChange = hre.ethers.parseUnits("10000", DECIMALS);
+            await expect(
+                tinyBankC.connect(signers[0]).setRewardPerBlock(rewardToChange)
+            ).to.be.revertedWith("Not all confirmed yet");
+        });
+
+        // 모든 manager가 confirm한 후 정상 실행
+        it("should succeed when all managers confirmed", async () => {
+            await tinyBankC.connect(signers[0]).confirm();
+            await tinyBankC.connect(signers[1]).confirm();
+            await tinyBankC.connect(signers[2]).confirm();
+            const rewardToChange = hre.ethers.parseUnits("10000", DECIMALS);
+            await tinyBankC.connect(signers[0]).setRewardPerBlock(rewardToChange);
+            expect(await tinyBankC.rewardPerBlock()).equal(rewardToChange);
+        });
     });
 });

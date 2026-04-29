@@ -26,9 +26,15 @@ import type {
 export interface TinyBankInterface extends Interface {
   getFunction(
     nameOrSignature:
+      | "confirm"
+      | "confirmCount"
+      | "hasConfirmed"
+      | "isManager"
       | "lastClaimedBlock"
       | "manager"
+      | "managers"
       | "owner"
+      | "rewardPerBlock"
       | "setRewardPerBlock"
       | "stake"
       | "staked"
@@ -39,12 +45,33 @@ export interface TinyBankInterface extends Interface {
 
   getEvent(nameOrSignatureOrTopic: "Staked" | "Withdrawn"): EventFragment;
 
+  encodeFunctionData(functionFragment: "confirm", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "confirmCount",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "hasConfirmed",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isManager",
+    values: [AddressLike]
+  ): string;
   encodeFunctionData(
     functionFragment: "lastClaimedBlock",
     values: [AddressLike]
   ): string;
   encodeFunctionData(functionFragment: "manager", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "managers",
+    values: [BigNumberish]
+  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "rewardPerBlock",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "setRewardPerBlock",
     values: [BigNumberish]
@@ -64,12 +91,27 @@ export interface TinyBankInterface extends Interface {
     values: [BigNumberish]
   ): string;
 
+  decodeFunctionResult(functionFragment: "confirm", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "confirmCount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "hasConfirmed",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "isManager", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "lastClaimedBlock",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "manager", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "managers", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "rewardPerBlock",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "setRewardPerBlock",
     data: BytesLike
@@ -156,11 +198,23 @@ export interface TinyBank extends BaseContract {
     event?: TCEvent
   ): Promise<this>;
 
+  confirm: TypedContractMethod<[], [void], "nonpayable">;
+
+  confirmCount: TypedContractMethod<[], [bigint], "view">;
+
+  hasConfirmed: TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+
+  isManager: TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+
   lastClaimedBlock: TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
 
   manager: TypedContractMethod<[], [string], "view">;
 
+  managers: TypedContractMethod<[arg0: BigNumberish], [string], "view">;
+
   owner: TypedContractMethod<[], [string], "view">;
+
+  rewardPerBlock: TypedContractMethod<[], [bigint], "view">;
 
   setRewardPerBlock: TypedContractMethod<
     [_amount: BigNumberish],
@@ -183,14 +237,32 @@ export interface TinyBank extends BaseContract {
   ): T;
 
   getFunction(
+    nameOrSignature: "confirm"
+  ): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "confirmCount"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "hasConfirmed"
+  ): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+  getFunction(
+    nameOrSignature: "isManager"
+  ): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+  getFunction(
     nameOrSignature: "lastClaimedBlock"
   ): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
   getFunction(
     nameOrSignature: "manager"
   ): TypedContractMethod<[], [string], "view">;
   getFunction(
+    nameOrSignature: "managers"
+  ): TypedContractMethod<[arg0: BigNumberish], [string], "view">;
+  getFunction(
     nameOrSignature: "owner"
   ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "rewardPerBlock"
+  ): TypedContractMethod<[], [bigint], "view">;
   getFunction(
     nameOrSignature: "setRewardPerBlock"
   ): TypedContractMethod<[_amount: BigNumberish], [void], "nonpayable">;

@@ -29,8 +29,13 @@ export interface MyTokenInterface extends Interface {
       | "allowance"
       | "approve"
       | "balanceOf"
+      | "confirm"
+      | "confirmCount"
       | "decimals"
+      | "hasConfirmed"
+      | "isManager"
       | "manager"
+      | "managers"
       | "mint"
       | "name"
       | "owner"
@@ -55,8 +60,25 @@ export interface MyTokenInterface extends Interface {
     functionFragment: "balanceOf",
     values: [AddressLike]
   ): string;
+  encodeFunctionData(functionFragment: "confirm", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "confirmCount",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "hasConfirmed",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isManager",
+    values: [AddressLike]
+  ): string;
   encodeFunctionData(functionFragment: "manager", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "managers",
+    values: [BigNumberish]
+  ): string;
   encodeFunctionData(
     functionFragment: "mint",
     values: [BigNumberish, AddressLike]
@@ -84,8 +106,19 @@ export interface MyTokenInterface extends Interface {
   decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "confirm", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "confirmCount",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "hasConfirmed",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "isManager", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "manager", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "managers", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
@@ -190,9 +223,19 @@ export interface MyToken extends BaseContract {
 
   balanceOf: TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
 
+  confirm: TypedContractMethod<[], [void], "nonpayable">;
+
+  confirmCount: TypedContractMethod<[], [bigint], "view">;
+
   decimals: TypedContractMethod<[], [bigint], "view">;
 
+  hasConfirmed: TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+
+  isManager: TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+
   manager: TypedContractMethod<[], [string], "view">;
+
+  managers: TypedContractMethod<[arg0: BigNumberish], [string], "view">;
 
   mint: TypedContractMethod<
     [amount: BigNumberish, to: AddressLike],
@@ -248,11 +291,26 @@ export interface MyToken extends BaseContract {
     nameOrSignature: "balanceOf"
   ): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
   getFunction(
+    nameOrSignature: "confirm"
+  ): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "confirmCount"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
     nameOrSignature: "decimals"
   ): TypedContractMethod<[], [bigint], "view">;
   getFunction(
+    nameOrSignature: "hasConfirmed"
+  ): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+  getFunction(
+    nameOrSignature: "isManager"
+  ): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+  getFunction(
     nameOrSignature: "manager"
   ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "managers"
+  ): TypedContractMethod<[arg0: BigNumberish], [string], "view">;
   getFunction(
     nameOrSignature: "mint"
   ): TypedContractMethod<

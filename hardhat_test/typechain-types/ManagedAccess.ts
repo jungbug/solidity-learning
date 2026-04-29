@@ -3,10 +3,12 @@
 /* eslint-disable */
 import type {
   BaseContract,
+  BigNumberish,
   BytesLike,
   FunctionFragment,
   Result,
   Interface,
+  AddressLike,
   ContractRunner,
   ContractMethod,
   Listener,
@@ -20,12 +22,49 @@ import type {
 } from "./common";
 
 export interface ManagedAccessInterface extends Interface {
-  getFunction(nameOrSignature: "manager" | "owner"): FunctionFragment;
+  getFunction(
+    nameOrSignature:
+      | "confirm"
+      | "confirmCount"
+      | "hasConfirmed"
+      | "isManager"
+      | "manager"
+      | "managers"
+      | "owner"
+  ): FunctionFragment;
 
+  encodeFunctionData(functionFragment: "confirm", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "confirmCount",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "hasConfirmed",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isManager",
+    values: [AddressLike]
+  ): string;
   encodeFunctionData(functionFragment: "manager", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "managers",
+    values: [BigNumberish]
+  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
 
+  decodeFunctionResult(functionFragment: "confirm", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "confirmCount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "hasConfirmed",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "isManager", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "manager", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "managers", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
 }
 
@@ -72,7 +111,17 @@ export interface ManagedAccess extends BaseContract {
     event?: TCEvent
   ): Promise<this>;
 
+  confirm: TypedContractMethod<[], [void], "nonpayable">;
+
+  confirmCount: TypedContractMethod<[], [bigint], "view">;
+
+  hasConfirmed: TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+
+  isManager: TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+
   manager: TypedContractMethod<[], [string], "view">;
+
+  managers: TypedContractMethod<[arg0: BigNumberish], [string], "view">;
 
   owner: TypedContractMethod<[], [string], "view">;
 
@@ -81,8 +130,23 @@ export interface ManagedAccess extends BaseContract {
   ): T;
 
   getFunction(
+    nameOrSignature: "confirm"
+  ): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "confirmCount"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "hasConfirmed"
+  ): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+  getFunction(
+    nameOrSignature: "isManager"
+  ): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+  getFunction(
     nameOrSignature: "manager"
   ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "managers"
+  ): TypedContractMethod<[arg0: BigNumberish], [string], "view">;
   getFunction(
     nameOrSignature: "owner"
   ): TypedContractMethod<[], [string], "view">;
