@@ -51,6 +51,7 @@ contract TinyBank {
         stakingToken.transfer(_amount, msg.sender);
         staked[msg.sender] -= _amount;
         totalStaked -= _amount;
+        
         emit Withdrawn(_amount, msg.sender);
     }
 
