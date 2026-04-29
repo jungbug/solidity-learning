@@ -22,8 +22,14 @@ import type {
 } from "../common";
 
 export interface IMyTokenInterface extends Interface {
-  getFunction(nameOrSignature: "transfer" | "transferFrom"): FunctionFragment;
+  getFunction(
+    nameOrSignature: "mint" | "transfer" | "transferFrom"
+  ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "mint",
+    values: [BigNumberish, AddressLike]
+  ): string;
   encodeFunctionData(
     functionFragment: "transfer",
     values: [BigNumberish, AddressLike]
@@ -33,6 +39,7 @@ export interface IMyTokenInterface extends Interface {
     values: [AddressLike, AddressLike, BigNumberish]
   ): string;
 
+  decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "transfer", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "transferFrom",
@@ -83,6 +90,12 @@ export interface IMyToken extends BaseContract {
     event?: TCEvent
   ): Promise<this>;
 
+  mint: TypedContractMethod<
+    [amount: BigNumberish, owner: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
   transfer: TypedContractMethod<
     [amount: BigNumberish, to: AddressLike],
     [void],
@@ -99,6 +112,13 @@ export interface IMyToken extends BaseContract {
     key: string | FunctionFragment
   ): T;
 
+  getFunction(
+    nameOrSignature: "mint"
+  ): TypedContractMethod<
+    [amount: BigNumberish, owner: AddressLike],
+    [void],
+    "nonpayable"
+  >;
   getFunction(
     nameOrSignature: "transfer"
   ): TypedContractMethod<

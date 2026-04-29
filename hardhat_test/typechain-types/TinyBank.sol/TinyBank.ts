@@ -26,15 +26,20 @@ import type {
 export interface TinyBankInterface extends Interface {
   getFunction(
     nameOrSignature:
+      | "lastClaimedBlock"
       | "stake"
       | "staked"
       | "stakingToken"
-      | "totalstaked"
+      | "totalStaked"
       | "withdraw"
   ): FunctionFragment;
 
   getEvent(nameOrSignatureOrTopic: "Staked" | "Withdrawn"): EventFragment;
 
+  encodeFunctionData(
+    functionFragment: "lastClaimedBlock",
+    values: [AddressLike]
+  ): string;
   encodeFunctionData(functionFragment: "stake", values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: "staked", values: [AddressLike]): string;
   encodeFunctionData(
@@ -42,7 +47,7 @@ export interface TinyBankInterface extends Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "totalstaked",
+    functionFragment: "totalStaked",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -50,6 +55,10 @@ export interface TinyBankInterface extends Interface {
     values: [BigNumberish]
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "lastClaimedBlock",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "stake", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "staked", data: BytesLike): Result;
   decodeFunctionResult(
@@ -57,7 +66,7 @@ export interface TinyBankInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "totalstaked",
+    functionFragment: "totalStaked",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
@@ -132,13 +141,15 @@ export interface TinyBank extends BaseContract {
     event?: TCEvent
   ): Promise<this>;
 
+  lastClaimedBlock: TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+
   stake: TypedContractMethod<[_amount: BigNumberish], [void], "nonpayable">;
 
   staked: TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
 
   stakingToken: TypedContractMethod<[], [string], "view">;
 
-  totalstaked: TypedContractMethod<[], [bigint], "view">;
+  totalStaked: TypedContractMethod<[], [bigint], "view">;
 
   withdraw: TypedContractMethod<[_amount: BigNumberish], [void], "nonpayable">;
 
@@ -146,6 +157,9 @@ export interface TinyBank extends BaseContract {
     key: string | FunctionFragment
   ): T;
 
+  getFunction(
+    nameOrSignature: "lastClaimedBlock"
+  ): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
   getFunction(
     nameOrSignature: "stake"
   ): TypedContractMethod<[_amount: BigNumberish], [void], "nonpayable">;
@@ -156,7 +170,7 @@ export interface TinyBank extends BaseContract {
     nameOrSignature: "stakingToken"
   ): TypedContractMethod<[], [string], "view">;
   getFunction(
-    nameOrSignature: "totalstaked"
+    nameOrSignature: "totalStaked"
   ): TypedContractMethod<[], [bigint], "view">;
   getFunction(
     nameOrSignature: "withdraw"
