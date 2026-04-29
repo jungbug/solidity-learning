@@ -1,6 +1,7 @@
 import hre from "hardhat";
 import { expect } from "chai";
-import {MyToken, TinyBank} from "../ignition/modules/MyToken";
+import { DECIMALS, MINTING_AMOUNT } from "./constant";
+import { MyToken, TinyBank } from "../ignition/modules/MyToken";
 import { HardhatEtherSigner } from "@nomicfoundation/hardhat-ethers/signers";
 
 describe("TinyBank", () => {
@@ -12,34 +13,46 @@ describe("TinyBank", () => {
         myTokenC = await hre.ethers.deployContract("MyToken", [
             "MyToken",
             "MT",
-            decimals,
-            mintingAmount,
+            DECIMALS,
+            MINTING_AMOUNT,
         ]);
         tinyBankC = await hre.ethers.deployContract("TinyBank", [
             await myTokenC.getAddress()
         ]);
-    })  
+    })
 
     describe("Initialized state check", () => {
-        it ("should return 0 totalStacked", async () => {
-            expect(await tinyBankC.totalStacked()).equal(0)
+        it("should return 0 totalStaked", async () => {
+            expect(await tinyBankC.totalstaked()).equal(0)
         });
-        it ("should return stacked 0 amount of signer 0", async () => {
-            // const [signer0] = await hre.ethers.getSigners();
+        it("should return staked 0 amount of signer 0", async () => {
             const signer0 = signers[0];
-            expect(await tinyBankC.stackedAmount(signer0.address)).equal(0);
+            expect(await tinyBankC.stakedAmount(signer0.address)).equal(0);
         });
     })
 
     describe("Staking", () => {
         it("should return staked amount", async () => {
             const signer0 = signers[0];
-            const stakingAmount = hre.ethers.parseUnits("50", decimals);
+            const stakingAmount = hre.ethers.parseUnits("50", DECIMALS);
             await myTokenC.approve(tinyBankC, stakingAmount);
             await tinyBankC.stake(stakingAmount);
             expect(await tinyBankC.staked(signer0.address)).equal(stakingAmount);
-            expect(await myTokenC.balanceOf(tinyBankC)).equal(await tinyBankC.totalStacked());
-            expect(await myTokenC.balanceOf(tinyBankC)).equal(await tinyBankC.totalStacked());
+            expect(await myTokenC.balanceOf(tinyBankC)).equal(await tinyBankC.totalStaked());
+            expect(await myTokenC.balanceOf(tinyBankC)).equal(await tinyBankC.totalStaked());
         });
     });
+
+    describe("Withdraw", () => {
+        it("should return 0 staked after withdrawing total token", async () => {
+            const signer0 = signers[0];
+            const stakingAmount = hre.ethers.parseUnits("50", DECIMALS);
+            await myTokenC.approve(tinyBankC, stakingAmount);
+            await tinyBankC.stake(stakingAmount);
+            await tinyBankC.withdraw(stakingAmount);
+            expect(await tinyBankC.staked(signer0.address)).equal(0);
+        }
+        );
+    })
+
 });

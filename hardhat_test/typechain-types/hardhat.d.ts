@@ -21,6 +21,14 @@ declare module "hardhat/types/runtime" {
       name: "MyToken",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MyToken__factory>;
+    getContractFactory(
+      name: "IMyToken",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IMyToken__factory>;
+    getContractFactory(
+      name: "TinyBank",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TinyBank__factory>;
 
     getContractAt(
       name: "Lock",
@@ -32,6 +40,16 @@ declare module "hardhat/types/runtime" {
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.MyToken>;
+    getContractAt(
+      name: "IMyToken",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IMyToken>;
+    getContractAt(
+      name: "TinyBank",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TinyBank>;
 
     deployContract(
       name: "Lock",
@@ -41,6 +59,14 @@ declare module "hardhat/types/runtime" {
       name: "MyToken",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.MyToken>;
+    deployContract(
+      name: "IMyToken",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IMyToken>;
+    deployContract(
+      name: "TinyBank",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TinyBank>;
 
     deployContract(
       name: "Lock",
@@ -52,6 +78,16 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.MyToken>;
+    deployContract(
+      name: "IMyToken",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IMyToken>;
+    deployContract(
+      name: "TinyBank",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TinyBank>;
 
     // default types
     getContractFactory(

@@ -72,6 +72,43 @@
       "artifacts": [
         "MyToken"
       ]
+    },
+    "/Volumes/드라이브/university/blockchain_/hardhat2/hardhat_test/contracts/TinyBank.sol": {
+      "lastModificationDate": 1777373621031,
+      "contentHash": "f7cd3b128084c0ef214be7916e322c6b",
+      "sourceName": "contracts/TinyBank.sol",
+      "solcConfig": {
+        "version": "0.8.28",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.28"
+      ],
+      "artifacts": [
+        "IMyToken",
+        "TinyBank"
+      ]
     }
   }
 }
