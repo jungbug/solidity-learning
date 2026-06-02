@@ -23,17 +23,17 @@ contract TinyBank is ManagedAccess {
     uint256 public totalStaked;
 
     // _managers: 3명 이상의 manager 주소 배열
-    constructor(IMyToken _stakingToken, address[] memory _managers) ManagedAccess(msg.sender, msg.sender) {
+    constructor(IMyToken _stakingToken) ManagedAccess(msg.sender, msg.sender) {
         stakingToken = _stakingToken;
         rewardPerBlock = defaultRewardPerBlock;
-        require(_managers.length >= 3, "Need at least 3 managers");
-        for (uint256 i = 0; i < _managers.length; i++) {
-            _addManager(_managers[i]);
-        }
+        // require(_managers.length >= 3, "Need at least 3 managers");
+        // for (uint256 i = 0; i < _managers.length; i++) {
+        //     _addManager(_managers[i]);
+        // }
     }
 
     // 모든 manager가 confirm()을 호출한 후에만 실행 가능
-    function setRewardPerBlock(uint256 _amount) external onlyAllConfirmed {
+    function setRewardPerBlock(uint256 _amount) external onlyManager {
         rewardPerBlock = _amount;
     }
 
@@ -46,6 +46,15 @@ contract TinyBank is ManagedAccess {
         }
         lastClaimedBlock[to] = block.number;
         _;
+    }
+
+    function currentReward(address to) external view returns (uint256) {
+        if (staked[to] > 0) {
+            uint256 blocks = block.number - lastClaimedBlock[to];
+            return (blocks * rewardPerBlock * staked[to]) / totalStaked;
+        } else {
+            return 0;
+        }
     }
 
     function stake(uint256 _amount) external updateReward(msg.sender) {

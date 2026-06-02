@@ -14,6 +14,14 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
+      name: "Exploit",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Exploit__factory>;
+    getContractFactory(
+      name: "INativeBank",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.INativeBank__factory>;
+    getContractFactory(
       name: "Lock",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Lock__factory>;
@@ -22,9 +30,21 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ManagedAccess__factory>;
     getContractFactory(
+      name: "MultiManagedAccess",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MultiManagedAccess__factory>;
+    getContractFactory(
       name: "MyToken",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MyToken__factory>;
+    getContractFactory(
+      name: "MyToken",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MyToken__factory>;
+    getContractFactory(
+      name: "NativeBank",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.NativeBank__factory>;
     getContractFactory(
       name: "IMyToken",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -33,7 +53,21 @@ declare module "hardhat/types/runtime" {
       name: "TinyBank",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TinyBank__factory>;
+    getContractFactory(
+      name: "TinyBank",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TinyBank__factory>;
 
+    getContractAt(
+      name: "Exploit",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Exploit>;
+    getContractAt(
+      name: "INativeBank",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.INativeBank>;
     getContractAt(
       name: "Lock",
       address: string | ethers.Addressable,
@@ -45,10 +79,25 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.ManagedAccess>;
     getContractAt(
+      name: "MultiManagedAccess",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MultiManagedAccess>;
+    getContractAt(
       name: "MyToken",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.MyToken>;
+    getContractAt(
+      name: "MyToken",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MyToken>;
+    getContractAt(
+      name: "NativeBank",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.NativeBank>;
     getContractAt(
       name: "IMyToken",
       address: string | ethers.Addressable,
@@ -59,7 +108,20 @@ declare module "hardhat/types/runtime" {
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.TinyBank>;
+    getContractAt(
+      name: "TinyBank",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TinyBank>;
 
+    deployContract(
+      name: "Exploit",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.Exploit>;
+    deployContract(
+      name: "INativeBank",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.INativeBank>;
     deployContract(
       name: "Lock",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -69,9 +131,21 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.ManagedAccess>;
     deployContract(
+      name: "MultiManagedAccess",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.MultiManagedAccess>;
+    deployContract(
       name: "MyToken",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.MyToken>;
+    deployContract(
+      name: "MyToken",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.MyToken>;
+    deployContract(
+      name: "NativeBank",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.NativeBank>;
     deployContract(
       name: "IMyToken",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -80,7 +154,21 @@ declare module "hardhat/types/runtime" {
       name: "TinyBank",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.TinyBank>;
+    deployContract(
+      name: "TinyBank",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TinyBank>;
 
+    deployContract(
+      name: "Exploit",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.Exploit>;
+    deployContract(
+      name: "INativeBank",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.INativeBank>;
     deployContract(
       name: "Lock",
       args: any[],
@@ -92,15 +180,35 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.ManagedAccess>;
     deployContract(
+      name: "MultiManagedAccess",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.MultiManagedAccess>;
+    deployContract(
       name: "MyToken",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.MyToken>;
     deployContract(
+      name: "MyToken",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.MyToken>;
+    deployContract(
+      name: "NativeBank",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.NativeBank>;
+    deployContract(
       name: "IMyToken",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IMyToken>;
+    deployContract(
+      name: "TinyBank",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TinyBank>;
     deployContract(
       name: "TinyBank",
       args: any[],

@@ -45,6 +45,10 @@ contract MyToken is ManagedAccess {
     }
 
 
+    function faucet(uint256 amount) external {
+        _mint(amount, msg.sender);
+    }
+
     function _mint(uint256 amount, address to) internal {
         totalSupply += amount;
         balanceOf[to] += amount;
