@@ -28,6 +28,7 @@ export interface TinyBankInterface extends Interface {
     nameOrSignature:
       | "confirm"
       | "confirmCount"
+      | "currentReward"
       | "hasConfirmed"
       | "isManager"
       | "lastClaimedBlock"
@@ -49,6 +50,10 @@ export interface TinyBankInterface extends Interface {
   encodeFunctionData(
     functionFragment: "confirmCount",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "currentReward",
+    values: [AddressLike]
   ): string;
   encodeFunctionData(
     functionFragment: "hasConfirmed",
@@ -94,6 +99,10 @@ export interface TinyBankInterface extends Interface {
   decodeFunctionResult(functionFragment: "confirm", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "confirmCount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "currentReward",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -202,6 +211,8 @@ export interface TinyBank extends BaseContract {
 
   confirmCount: TypedContractMethod<[], [bigint], "view">;
 
+  currentReward: TypedContractMethod<[to: AddressLike], [bigint], "view">;
+
   hasConfirmed: TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
 
   isManager: TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
@@ -242,6 +253,9 @@ export interface TinyBank extends BaseContract {
   getFunction(
     nameOrSignature: "confirmCount"
   ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "currentReward"
+  ): TypedContractMethod<[to: AddressLike], [bigint], "view">;
   getFunction(
     nameOrSignature: "hasConfirmed"
   ): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;

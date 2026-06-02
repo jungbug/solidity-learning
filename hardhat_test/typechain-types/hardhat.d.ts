@@ -38,10 +38,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MyToken__factory>;
     getContractFactory(
-      name: "MyToken",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.MyToken__factory>;
-    getContractFactory(
       name: "NativeBank",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.NativeBank__factory>;
@@ -53,10 +49,6 @@ declare module "hardhat/types/runtime" {
       name: "TinyBank",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TinyBank__factory>;
-    getContractFactory(
-      name: "TinyBank",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TinyBank__factory>;
 
     getContractAt(
       name: "Exploit",
@@ -89,11 +81,6 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.MyToken>;
     getContractAt(
-      name: "MyToken",
-      address: string | ethers.Addressable,
-      signer?: ethers.Signer
-    ): Promise<Contracts.MyToken>;
-    getContractAt(
       name: "NativeBank",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
@@ -103,11 +90,6 @@ declare module "hardhat/types/runtime" {
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.IMyToken>;
-    getContractAt(
-      name: "TinyBank",
-      address: string | ethers.Addressable,
-      signer?: ethers.Signer
-    ): Promise<Contracts.TinyBank>;
     getContractAt(
       name: "TinyBank",
       address: string | ethers.Addressable,
@@ -139,10 +121,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.MyToken>;
     deployContract(
-      name: "MyToken",
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.MyToken>;
-    deployContract(
       name: "NativeBank",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.NativeBank>;
@@ -150,10 +128,6 @@ declare module "hardhat/types/runtime" {
       name: "IMyToken",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IMyToken>;
-    deployContract(
-      name: "TinyBank",
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.TinyBank>;
     deployContract(
       name: "TinyBank",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -190,11 +164,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.MyToken>;
     deployContract(
-      name: "MyToken",
-      args: any[],
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.MyToken>;
-    deployContract(
       name: "NativeBank",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -204,11 +173,6 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IMyToken>;
-    deployContract(
-      name: "TinyBank",
-      args: any[],
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.TinyBank>;
     deployContract(
       name: "TinyBank",
       args: any[],

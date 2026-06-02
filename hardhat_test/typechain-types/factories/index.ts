@@ -2,9 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as exploitSol from "./Exploit.sol";
-export * as myTokenVy from "./MyToken.vy";
 export * as tinyBankSol from "./TinyBank.sol";
-export * as tinyBankVy from "./TinyBank.vy";
 export { Lock__factory } from "./Lock__factory";
 export { ManagedAccess__factory } from "./ManagedAccess__factory";
 export { MultiManagedAccess__factory } from "./MultiManagedAccess__factory";

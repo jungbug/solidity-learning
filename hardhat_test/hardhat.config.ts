@@ -13,6 +13,9 @@ const config: HardhatUserConfig = {
       accounts: ["0x82628c3eb1f3fc245986fa976863f4f501045c3fcca57ef571656911d3220469"],
     }
   },
+  sourcify: {
+    enabled: true,
+  },
   etherscan: {
       apiKey: {
         kairos: "unnecessary",

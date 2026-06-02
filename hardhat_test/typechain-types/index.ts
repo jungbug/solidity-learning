@@ -3,12 +3,8 @@
 /* eslint-disable */
 import type * as exploitSol from "./Exploit.sol";
 export type { exploitSol };
-import type * as myTokenVy from "./MyToken.vy";
-export type { myTokenVy };
 import type * as tinyBankSol from "./TinyBank.sol";
 export type { tinyBankSol };
-import type * as tinyBankVy from "./TinyBank.vy";
-export type { tinyBankVy };
 export type { Lock } from "./Lock";
 export type { ManagedAccess } from "./ManagedAccess";
 export type { MultiManagedAccess } from "./MultiManagedAccess";

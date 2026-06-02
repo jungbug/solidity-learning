@@ -32,6 +32,7 @@ export interface MyTokenInterface extends Interface {
       | "confirm"
       | "confirmCount"
       | "decimals"
+      | "faucet"
       | "hasConfirmed"
       | "isManager"
       | "manager"
@@ -66,6 +67,10 @@ export interface MyTokenInterface extends Interface {
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "faucet",
+    values: [BigNumberish]
+  ): string;
   encodeFunctionData(
     functionFragment: "hasConfirmed",
     values: [AddressLike]
@@ -112,6 +117,7 @@ export interface MyTokenInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "faucet", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "hasConfirmed",
     data: BytesLike
@@ -229,6 +235,8 @@ export interface MyToken extends BaseContract {
 
   decimals: TypedContractMethod<[], [bigint], "view">;
 
+  faucet: TypedContractMethod<[amount: BigNumberish], [void], "nonpayable">;
+
   hasConfirmed: TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
 
   isManager: TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
@@ -299,6 +307,9 @@ export interface MyToken extends BaseContract {
   getFunction(
     nameOrSignature: "decimals"
   ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "faucet"
+  ): TypedContractMethod<[amount: BigNumberish], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "hasConfirmed"
   ): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
